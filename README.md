@@ -1,7 +1,7 @@
 #HQGA: Video as Conditional Graph Hierarchy for Multi-Granular Question Answering
 
-![teaser](https://github.com/doc-doc/HQGA/blob/master/introduction.png)
-![](https://github.com/doc-doc/HQGA/blob/master/model.png)
+![teaser](https://github.com/doc-doc/HQGA/blob/main/introduction.png)
+![](https://github.com/doc-doc/HQGA/blob/main/model.png)
 
 ## Todo
 2. [] Release data of other datasets.
