@@ -172,7 +172,7 @@ class VideoQA():
         """
         model_path = osp.join(self.model_dir, model_file)
         self.build_model()
-        if self.model_type in['HGA', 'STVQA', 'HCG']:
+        if self.model_type in['HGA', 'STVQA']:
             self.resume(model_file)
         else:
             old_state_dict = torch.load(model_path)

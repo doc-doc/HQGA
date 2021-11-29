@@ -254,7 +254,7 @@ class QALoader():
         validation_set = VideoQADataset(self.video_feature_path, self.video_feature_cache, self.sample_list_path,
                                          self.vocab, self.multi_choice, self.use_bert, mode)
 
-        print('Eligible video-qa pairs for validation : {}'.format(len(validation_set)))
+        print('Eligible video-qa pairs for validation/test : {}'.format(len(validation_set)))
         if not self.multi_choice and not self.use_bert:
             val_loader = DataLoader(
                 dataset=validation_set,

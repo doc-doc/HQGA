@@ -4,8 +4,8 @@ from nltk.corpus import wordnet as wn
 qns_type_total = {'what':0, 'who':0, 'how':0, 'when':0, 'where':0}
 qns_type_right = {'what':0, 'who':0, 'how':0, 'when':0, 'where':0}
 
-what_type_total = {'v':0, 'n':0}
-what_type_right = {'v':0, 'n':0}
+what_type_total = {'a':0, 'o':0}
+what_type_right = {'a':0, 'o':0}
 
 def classified_metric(gt_file, pred_file):
     samples = pd.read_csv(gt_file)
@@ -20,8 +20,8 @@ def classified_metric(gt_file, pred_file):
         qns_type_total[qtype] += 1
         #############################################
         if qtype == 'what':
-            tag = 'n'
-            if 'doing' in s_qns: tag = 'v'
+            tag = 'o'
+            if 'doing' in s_qns: tag = 'a'
             qid2tag[qid] = tag
             what_type_total[tag] += 1
         #############################################
@@ -95,8 +95,8 @@ def main(result_file, dataset_dir, mode='val'):
 if __name__ == "__main__":
     model_type = 'HQGA'
     mode = 'test'
+    dataset = 'msvd'
     model_prefix = 'bert-8c10b-2L05GCN-FCV-AC-VM-{}'.format(mode)
-    result_file = 'results/msrvtt/{}-{}.json'.format(model_type, model_prefix)
-    # result_file = 'results/hcrn_test.json'
-    dataset_dir = 'dataset/msrvtt/'
+    result_file = 'results/{}/{}-{}.json'.format(dataset, model_type, model_prefix)
+    dataset_dir = 'dataset/{}/'.format(dataset)
     main(result_file, dataset_dir, mode)
