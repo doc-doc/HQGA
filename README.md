@@ -19,7 +19,7 @@ Please create an env for this project using anaconda (should install [anaconda](
 >pip install -r requirements.txt #may take some time to install
 ```
 ## Data Preparation
-We use MSVD-QA as an example to help get farmilair with the code. Please download the pre-computed features and trained models [here](https://drive.google.com/file/d/1bIWUqM9HtaJv2zDaEtz92v6UrTZtwGv9/view?usp=sharing)
+We use MSVD-QA as an example to help get farmiliar with the code. Please download the pre-computed features and trained models [here](https://drive.google.com/file/d/1bIWUqM9HtaJv2zDaEtz92v6UrTZtwGv9/view?usp=sharing)
 
 After downloading the data, please create a folder ```['data/']``` at the same directory as ```['HQGA']```, then unzip the video and QA features into it. You will have directories like ```['data/msvd/' and 'HQGA/']``` in your workspace. Please move the model file ```[.ckpt]``` into ```['HQGA/models/msvd/']```. 
 
@@ -28,19 +28,19 @@ After downloading the data, please create a folder ```['data/']``` at the same d
 Once the data is ready, you can easily run the code. First, to test the environment and code, we provide the prediction and model of the HQGA on MSVD-QA. 
 You can get the results reported in the paper by running: 
 ```
->python eval_mc.py
+>python eval_oe.py
 ```
-The command above will load the prediction file under ['results/'] and evaluate it. 
+The command above will load the prediction file under ['results/msvd/'] and evaluate it. 
 You can also obtain the prediction by running: 
 ```
->./main.sh 0 val #Test the model with GPU id 0
+>./main.sh 0 test #Test the model with GPU id 0
 ```
-The command above will load the model under ['models/'] and generate the prediction file.
-If you want to train the model, please run
+The command above will load the model under ['models/msvd/'] and generate the prediction file.
+If you want to train the model (Please follow our paper for details.), please run
 ```
 >./main.sh 0 train # Train the model with GPU id 0
 ```
-It will train the model and save to ['models']. (*The results may be slightly different depending on the environments*)
+It will train the model and save to ['models/msvd']. 
 ## Results
 
 ## Citation
