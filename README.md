@@ -4,7 +4,7 @@
 ![](https://github.com/doc-doc/HQGA/blob/main/model.png)
 
 ## Todo
-2. [] Release data of other datasets.
+2. [ ] Release data of other datasets.
 
 ## Environment
 
@@ -19,13 +19,9 @@ Please create an env for this project using anaconda (should install [anaconda](
 >pip install -r requirements.txt #may take some time to install
 ```
 ## Data Preparation
-We use MSVD-QA as an example to help get farmilair with the code. Please download the pre-computed features and QA annotations from [here](https://drive.google.com/drive/folders/1gKRR2es8-gRTyP25CvrrVtV6aN5UxttF?usp=sharing). There are 4 zip files: 
-- ```['vid_feat.zip']```: Appearance and motion feature for video representation. (With code provided by [HCRN](https://github.com/thaolmk54/hcrn-videoqa)).
-- ```['qas_bert.zip']```: Finetuned BERT feature for QA-pair representation. (Based on [pytorch-pretrained-BERT](https://github.com/LuoweiZhou/pytorch-pretrained-BERT/)).
-- ```['nextqa.zip']```: Annotations of QAs and GloVe Embeddings. 
-- ```['models.zip']```: HGA model. 
+We use MSVD-QA as an example to help get farmilair with the code. Please download the pre-computed features and trained models [here](https://drive.google.com/file/d/1bIWUqM9HtaJv2zDaEtz92v6UrTZtwGv9/view?usp=sharing)
 
-After downloading the data, please create a folder ```['data/feats']``` at the same directory as ```['HQGA']```, then unzip the video and QA features into it. You will have directories like ```['data/msvd/' and 'HQGA/']``` in your workspace. Please move the model file ```[.ckpt]``` into ```['HQGA/models/msvd/']```. 
+After downloading the data, please create a folder ```['data/']``` at the same directory as ```['HQGA']```, then unzip the video and QA features into it. You will have directories like ```['data/msvd/' and 'HQGA/']``` in your workspace. Please move the model file ```[.ckpt]``` into ```['HQGA/models/msvd/']```. 
 
 
 ## Usage
