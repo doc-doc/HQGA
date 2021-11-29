@@ -1,5 +1,4 @@
 cached-property==1.5.2
-certifi==2021.5.30
 cycler==0.11.0
 decorator==4.4.2
 future==0.18.2

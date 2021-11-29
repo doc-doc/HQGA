@@ -16,7 +16,7 @@ Please create an env for this project using anaconda (should install [anaconda](
 >conda create -n videoqa python==3.6.8
 >conda activate videoqa
 >git clone https://github.com/doc-doc/HQGA.git
->pip install -r requirements.txt #may take some time to install
+>pip install -r requirements.txt
 ```
 ## Data Preparation
 We use MSVD-QA as an example to help get farmiliar with the code. Please download the pre-computed features and trained models [here](https://drive.google.com/file/d/1bIWUqM9HtaJv2zDaEtz92v6UrTZtwGv9/view?usp=sharing)
