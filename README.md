@@ -41,11 +41,9 @@ If you want to train the model (Please follow our paper for details.), please ru
 >./main.sh 0 train # Train the model with GPU id 0
 ```
 It will train the model and save to ['models/msvd']. 
-## Results
 
 ## Citation
 ```
 
 ```
-## Acknowledgement
 
