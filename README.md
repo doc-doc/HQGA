@@ -44,6 +44,14 @@ It will train the model and save to ['models/msvd'].
 
 ## Citation
 ```
+@misc{xiao2021video,
+      title={Video as Conditional Graph Hierarchy for Multi-Granular Question Answering}, 
+      author={Junbin Xiao and Angela Yao and Zhiyuan Liu and Yicong Li and Wei Ji and Tat-Seng Chua},
+      year={2021},
+      eprint={2112.06197},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 
 ```
 
