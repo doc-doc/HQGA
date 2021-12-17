@@ -1,4 +1,4 @@
-## HQGA: Video as Conditional Graph Hierarchy for Multi-Granular Question Answering
+## HQGA: [Video as Conditional Graph Hierarchy for Multi-Granular Question Answering](https://arxiv.org/pdf/2112.06197.pdf)
 
 ![teaser](https://github.com/doc-doc/HQGA/blob/main/introduction.png)
 ![](https://github.com/doc-doc/HQGA/blob/main/model.png)
@@ -54,4 +54,5 @@ It will train the model and save to ['models/msvd'].
 }
 
 ```
-
+## Acknowledgement
+Our feature extraction for object, frame appearance and motion are from [BUTD](https://github.com/peteanderson80/bottom-up-attention) and [HCRN](https://github.com/thaolmk54/hcrn-videoqa) respectively. Many thanks the authors for their greate work and code!
