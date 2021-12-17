@@ -44,15 +44,12 @@ It will train the model and save to ['models/msvd'].
 
 ## Citation
 ```
-@misc{xiao2021video,
+@proceedings{xiao2021video,
       title={Video as Conditional Graph Hierarchy for Multi-Granular Question Answering}, 
       author={Junbin Xiao and Angela Yao and Zhiyuan Liu and Yicong Li and Wei Ji and Tat-Seng Chua},
-      year={2021},
-      eprint={2112.06197},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+      booktitle={Proceedings of the AAAI Conference on Artificial Intelligence (AAAI)},
+      year={2022},
 }
-
 ```
 ## Acknowledgement
 Our feature extraction for object, frame appearance and motion are from [BUTD](https://github.com/peteanderson80/bottom-up-attention) and [HCRN](https://github.com/thaolmk54/hcrn-videoqa) respectively. Many thanks the authors for their greate work and code!
