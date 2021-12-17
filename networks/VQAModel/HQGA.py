@@ -227,9 +227,9 @@ class HQGA(nn.Module):
             gcn_att_pool_clip = torch.sum(gcn_output_clip, dim=1)
         
 
-        # vis_graph = {'QGCN-F':{'A':GO, 'P':att_region, 'Q':QO},
-        #              'QGCN-C':{'A':GA, 'P':att_frame, 'Q':QA},
-        #              'QGCN-V':{'A':GV, 'P':att_clip, 'Q':QV}}
+        # vis_graph = {'QG-F':{'A':GO, 'P':att_region, 'Q':QO},
+        #              'QG-C':{'A':GA, 'P':att_frame, 'Q':QA},
+        #              'QG-V':{'A':GV, 'P':att_clip, 'Q':QV}}
         vis_graph = None
 
         return gcn_output_clip, gcn_att_pool_clip, num_clips, vis_graph

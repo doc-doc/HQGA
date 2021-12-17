@@ -82,7 +82,7 @@ def overall_acc(sample_list_file, result_file):
 
 
 def main(result_file, dataset_dir, mode='val'):
-    #dataset_dir = 'dataset/msrvtt/'
+    
     data_set = mode
     sample_list_file = osp.join(dataset_dir, data_set+'.csv')
     print('Evaluating {}'.format(result_file))
@@ -96,7 +96,8 @@ if __name__ == "__main__":
     model_type = 'HQGA'
     mode = 'test'
     dataset = 'msvd'
+    task = ''
     model_prefix = 'bert-8c10b-2L05GCN-FCV-AC-VM-{}'.format(mode)
-    result_file = 'results/{}/{}-{}.json'.format(dataset, model_type, model_prefix)
-    dataset_dir = 'dataset/{}/'.format(dataset)
+    result_file = 'results/{}/{}/{}-{}.json'.format(dataset,task, model_type, model_prefix)
+    dataset_dir = 'dataset/{}/{}'.format(dataset, task)
     main(result_file, dataset_dir, mode)
