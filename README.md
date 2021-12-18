@@ -51,4 +51,4 @@ It will train the model and save to ['models/msvd'].
 }
 ```
 ## Acknowledgement
-Our feature extraction for object, frame appearance and motion are from [BUTD](https://github.com/peteanderson80/bottom-up-attention) and [HCRN](https://github.com/thaolmk54/hcrn-videoqa) respectively. Many thanks the authors for their greate work and code!
+Our feature extraction for object, frame appearance and motion are from [BUTD](https://github.com/peteanderson80/bottom-up-attention) and [HCRN](https://github.com/thaolmk54/hcrn-videoqa) respectively. Many thanks the authors for their great work and code!
