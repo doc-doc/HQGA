@@ -44,8 +44,8 @@ class VideoQADataset(Dataset):
             self.bbox_feats = {}
             with h5py.File(bbox_feat_file, 'r') as fp:
                 vids = fp['ids']
-                feats = fp['feat'] #fp_sf['slowfast'][:, ::2]
-                print(feats.shape)
+                feats = fp['feat']
+                print(feats.shape) #v_num, clip_num, frame_per_clip, region_per_frame, feat_dim
                 bboxes = fp['bbox']
                 for id, (vid, feat, bbox) in enumerate(zip(vids, feats, bboxes)):
                     self.bbox_feats[str(vid)] = (feat[:, :, :self.bbox_num, :],bbox[:, :, :self.bbox_num, :]) #(clip, frame, bbox, feat), (clip, frame, bbox, coord)
@@ -57,10 +57,10 @@ class VideoQADataset(Dataset):
             with h5py.File(app_feat_file, 'r') as fp:
                 vids = fp['ids']
                 feats = fp['resnet_features']
-                print(feats.shape)
+                print(feats.shape) #v_num, clip_num, frame_per_clip, feat_dim
                 for id, (vid, feat) in enumerate(zip(vids, feats)):
                     #self.frame_feats[str(vid)] = feat[::2, ::4, :]
-                    self.frame_feats[str(vid)] = feat[:,::4,:] #tgifqa
+                    self.frame_feats[str(vid)] = feat
                 
         if self.use_mot:
             mot_feat_file = osp.join(video_feature_path, 'mot_feat/mot_feat_{}.h5'.format(mode))
@@ -69,7 +69,7 @@ class VideoQADataset(Dataset):
             with h5py.File(mot_feat_file, 'r') as fp:
                 vids = fp['ids']
                 feats = fp['resnext_features']
-                print(feats.shape)
+                print(feats.shape) #v_num, clip_num, feat_dim
                 for id, (vid, feat) in enumerate(zip(vids, feats)):
                     self.mot_feats[str(vid)] = feat
 

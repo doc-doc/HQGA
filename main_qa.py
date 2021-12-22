@@ -3,7 +3,7 @@ import dataloader
 from build_vocab import Vocabulary
 from utils import *
 import argparse
-import mul_eval
+import eval_mc
 import eval_oe
 
 def main(args):
@@ -14,9 +14,9 @@ def main(args):
     else:
         batch_size = 64
         num_worker = 4
-    dataset = 'msvd'
-    task = '' #action, transition, frameqa
-    multi_choice = False
+    dataset = 'msvd' #nextqa, msrvtt,tgifqa
+    task = '' #if tgifqa, set task to 'action', 'transition', 'frameqa'
+    multi_choice = False # or True for nextqa and tgifqa-action(transition)
     use_bert = True
     spatial = True
     if spatial:
@@ -56,7 +56,7 @@ def main(args):
         if multi_choice == False:
             eval_oe.main(result_file, sample_list_path, mode)
         else:
-            mul_eval.main(result_file, sample_list_path, mode)
+            eval_mc.main(result_file, sample_list_path, mode)
     else:
         model_file = f'{model_type}-{model_prefix}-6-39.28.ckpt'
         vqa.run(model_file, pre_trained=False)
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     parser.add_argument('--gpu', dest='gpu', type=int,
                         default=0, help='gpu device id')
     parser.add_argument('--mode', dest='mode', type=str,
-                        default='train', help='train or val')
+                        default='train', help='[train, val, test]')
     args = parser.parse_args()
     set_gpu_devices(args.gpu)
     main(args)
