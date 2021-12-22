@@ -43,8 +43,8 @@ class EncoderVid(nn.Module):
             nn.ELU(inplace=True))
         
         # self.merge_fr = nn.Sequential(
-        #     nn.Linear(self.feat_hidden*2, self.feat_hidden),
-        #     nn.ELU(inplace=True))
+        #      nn.Linear(self.dim_hidden*2, self.dim_hidden),
+        #      nn.ELU(inplace=True))
 
         self.app_conv = nn.Sequential(
             nn.Conv1d(feat_dim, self.dim_hidden, 3, padding=1),

@@ -59,7 +59,7 @@ class VideoQADataset(Dataset):
                 feats = fp['resnet_features']
                 print(feats.shape) #v_num, clip_num, frame_per_clip, feat_dim
                 for id, (vid, feat) in enumerate(zip(vids, feats)):
-                    #self.frame_feats[str(vid)] = feat[::2, ::4, :]
+                    #self.frame_feats[str(vid)] = feat[::2]
                     self.frame_feats[str(vid)] = feat
                 
         if self.use_mot:
@@ -174,7 +174,7 @@ class VideoQADataset(Dataset):
             cur_sample = self.sample_list.loc[idx]
             video_name, qns, ans, qid = str(cur_sample['video']), str(cur_sample['question']), \
                                         str(cur_sample['answer']), str(cur_sample['qid'])
-            #width, height = 320, 240 #msrvtt
+            # width, height = 320, 240 #msrvtt
             width, height = cur_sample['width'], cur_sample['height']
             candidate_qas = self.get_word_idx(qns)
             qa_lengths = len(candidate_qas)

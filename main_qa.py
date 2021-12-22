@@ -16,7 +16,7 @@ def main(args):
         num_worker = 4
     dataset = 'msvd' #nextqa, msrvtt,tgifqa
     task = '' #if tgifqa, set task to 'action', 'transition', 'frameqa'
-    multi_choice = False # or True for nextqa and tgifqa-action(transition)
+    multi_choice = False # True for nextqa and tgifqa-action(transition)
     use_bert = True
     spatial = True
     if spatial:
