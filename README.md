@@ -41,6 +41,9 @@ If you want to train the model (Please follow our paper for details.), please ru
 ```
 It will train the model and save to ['models/msvd']. 
 
+## Result Visualization
+
+
 ## Citation
 ```
 @proceedings{xiao2021video,
