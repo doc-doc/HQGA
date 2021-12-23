@@ -42,7 +42,7 @@ If you want to train the model (Please follow our paper for details.), please ru
 It will train the model and save to ['models/msvd']. 
 
 ## Result Visualization
-![teaser](https://github.com/doc-doc/HQGA/blob/main/vis-res.png)
+![vis-res](https://github.com/doc-doc/HQGA/blob/main/vis-res.png)
 **Example from NExT-QA dataset.
 ## Citation
 ```
