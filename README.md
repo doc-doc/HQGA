@@ -3,7 +3,7 @@
 ![teaser](https://github.com/doc-doc/HQGA/blob/main/introduction.png)
 
 ## Todo
-2. [ ] Release data of other datasets.
+2. [x] Release features of [NExT-QA](https://drive.google.com/file/d/1vU9IEW0GvXz3wzumfu9X8lm4ri2SBjLB/view?usp=sharing)([BERT feature](https://drive.google.com/file/d/1KtpduE0SViUYFjZq81hlSmgEr7e2QrUa/view?usp=sharing) are from [NExT-QA](https://github.com/doc-doc/NExT-QA))[2021/12/23].
 
 ## Environment
 
