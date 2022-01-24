@@ -146,7 +146,7 @@ class HQGA(nn.Module):
                 out = out.squeeze()
 
         return out, vis_graph
-    
+
     
     def hierarchy(self, vid_feats, qas_feat, qas_lengths):
         
@@ -162,17 +162,16 @@ class HQGA(nn.Module):
 
         batch_size, num_clip, frame_pclip, region_pframe, feat_dim = bbox_feats.size()
         
-        region_feat = bbox_feats.view(batch_size*num_clip*frame_pclip, region_pframe, feat_dim)
-        
-        num_rpframe = torch.tensor([region_pframe] * batch_size*num_clip*frame_pclip, dtype=torch.long)
-        
-        batch_repeat = np.reshape(np.tile(np.expand_dims(np.arange(batch_size),
-                                                        axis=1),[1, num_clip*frame_pclip]), [-1])
-        qas_feat_reg = qas_feat[batch_repeat]
-        qas_lengths_reg = qas_lengths[batch_repeat]
-        v_output, QO = self.bidirec_att(region_feat, num_rpframe, qas_feat_reg, qas_lengths_reg)
-        v_output += region_feat
+        xlen = num_clip*frame_pclip*region_pframe
+        X = bbox_feats.view(batch_size, xlen, feat_dim)
+        X_len = torch.tensor([xlen] * batch_size, dtype=torch.long)
+        v_output, QO = self.bidirec_att(X, X_len, qas_feat, qas_lengths)
+        v_output += X
 
+        v_output = v_output.view(-1, region_pframe, feat_dim)
+        num_rpframe = torch.tensor([region_pframe] * v_output.shape[0], dtype=torch.long)
+        
+        
         gcn_output_region, GO = self.gcn_region(v_output, num_rpframe)
         if self.num_class >= 1:
             att_region = self.gcn_atten_pool_region(gcn_output_region)
@@ -181,22 +180,19 @@ class HQGA(nn.Module):
             gcn_att_pool_region = torch.sum(gcn_output_region, dim=1)
 
         #############GF########################
-        gcn_region_output = gcn_att_pool_region.view(batch_size*num_clip, frame_pclip, -1)
-        app_feats_f = app_feats.reshape(batch_size*num_clip, frame_pclip, -1)
+        gcn_region_output = gcn_att_pool_region.view(batch_size, num_clip*frame_pclip, -1)
+        app_feats_f = app_feats.reshape(batch_size, num_clip*frame_pclip, -1)
         tmp = torch.cat((app_feats_f, gcn_region_output), -1)
         gcn_frame_input = self.merge_rf(tmp)
-        gcn_output_frame = gcn_frame_input
-        # gcn_frame_input = gcn_region_output
-        # gcn_frame_input = app_feats_f
-        num_fpclip = torch.tensor([frame_pclip] * batch_size * num_clip, dtype=torch.long)
         
-        batch_repeat = np.reshape(np.tile(np.expand_dims(np.arange(batch_size),
-                                                          axis=1), [1, num_clip]), [-1])
-        qas_feat_frame = qas_feat[batch_repeat]
-        qas_lengths_frame = qas_lengths[batch_repeat]
-        v_output, QF = self.bidirec_att(gcn_frame_input, num_fpclip, qas_feat_frame, qas_lengths_frame)
-        v_output += gcn_frame_input
+        xlen = num_clip*frame_pclip
+        X = gcn_frame_input
+        X_len = torch.tensor([xlen] * batch_size, dtype=torch.long)
+        v_output, QF = self.bidirec_att(X, X_len, qas_feat, qas_lengths)
+        v_output += X
         
+        v_output = v_output.view(-1, frame_pclip, feat_dim)
+        num_fpclip = torch.tensor([frame_pclip] * v_output.shape[0], dtype=torch.long)
         gcn_output_frame, GF = self.gcn_frame(v_output, num_fpclip)
 
         if self.num_class >= 1:
@@ -205,14 +201,14 @@ class HQGA(nn.Module):
         else:
             gcn_att_pool_frame = torch.sum(gcn_output_frame, dim=1)
 
-        #############Gc########################
+        #############GC########################
         gcn_frame_output = gcn_att_pool_frame.view(batch_size, num_clip, -1) 
-        # app_feats_c = app_feats[:, :, 1, :]
+        
         batch_size, num_clip, _ = mot_feats.size()
         num_clips = torch.tensor([num_clip] * batch_size, dtype=torch.long)
         tmp = torch.cat((gcn_frame_output, mot_feats), -1)
         gcn_clip_input = self.merge_cm(tmp)
-        gcn_output_clip = gcn_clip_input
+        
         
         v_output, QC = self.bidirec_att(gcn_clip_input, num_clips, qas_feat, qas_lengths)
         v_output += gcn_clip_input
@@ -225,10 +221,6 @@ class HQGA(nn.Module):
         else:
             gcn_att_pool_clip = torch.sum(gcn_output_clip, dim=1)
         
-
-        # vis_graph = {'QG-F':{'A':GO, 'P':att_region, 'Q':QO},
-        #              'QG-C':{'A':GF, 'P':att_frame, 'Q':QF},
-        #              'QG-V':{'A':GC, 'P':att_clip, 'Q':QC}}
         vis_graph = None
 
         return gcn_output_clip, gcn_att_pool_clip, num_clips, vis_graph

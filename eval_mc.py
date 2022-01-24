@@ -54,8 +54,8 @@ def accuracy_metric(sample_list_file, result_file):
     print('Acc: {:.2f}'.format(all_acc*100.0/all_cnt))
 
 
-def main(result_file, mode='val'):
-    dataset_dir = 'dataset/nextqa/'
+def main(result_file, dataset_dir, mode='val'):
+    # dataset_dir = 'dataset/nextqa/'
     data_set = mode
     sample_list_file = osp.join(dataset_dir, data_set+'.csv')
     print('Evaluating {}'.format(result_file))

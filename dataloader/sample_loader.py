@@ -22,7 +22,7 @@ class VideoQADataset(Dataset):
         self.video_feature_cache = video_feature_cache
         self.max_qa_length = 20 #20 for MSRVTT, MSVD, TGIF-QA Trans & Action, 37 for nextqa
         self.use_bbox = True
-        self.bbox_num = 10
+        self.bbox_num = 10 #20 for NExT-QA, 10 for others
         self.use_bert = use_bert
         self.use_frame = True
         self.use_mot = True
