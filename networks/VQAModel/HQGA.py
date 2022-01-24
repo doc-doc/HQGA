@@ -150,7 +150,7 @@ class HQGA(nn.Module):
     
     def hierarchy(self, vid_feats, qas_feat, qas_lengths):
         
-        #############Frame-level GCN########################
+        #############Go########################
         bbox_feats, app_feats, mot_feats = vid_feats
         if self.num_class == 1:
             batch_size = bbox_feats.shape[0]
@@ -180,7 +180,7 @@ class HQGA(nn.Module):
         else:
             gcn_att_pool_region = torch.sum(gcn_output_region, dim=1)
 
-        #############Clip-level GCN########################
+        #############GF########################
         gcn_region_output = gcn_att_pool_region.view(batch_size*num_clip, frame_pclip, -1)
         app_feats_f = app_feats.reshape(batch_size*num_clip, frame_pclip, -1)
         tmp = torch.cat((app_feats_f, gcn_region_output), -1)
@@ -194,10 +194,10 @@ class HQGA(nn.Module):
                                                           axis=1), [1, num_clip]), [-1])
         qas_feat_frame = qas_feat[batch_repeat]
         qas_lengths_frame = qas_lengths[batch_repeat]
-        v_output, QA = self.bidirec_att(gcn_frame_input, num_fpclip, qas_feat_frame, qas_lengths_frame)
+        v_output, QF = self.bidirec_att(gcn_frame_input, num_fpclip, qas_feat_frame, qas_lengths_frame)
         v_output += gcn_frame_input
         
-        gcn_output_frame, GA = self.gcn_frame(v_output, num_fpclip)
+        gcn_output_frame, GF = self.gcn_frame(v_output, num_fpclip)
 
         if self.num_class >= 1:
             att_frame = self.gcn_atten_pool_frame(gcn_output_frame)
@@ -205,9 +205,8 @@ class HQGA(nn.Module):
         else:
             gcn_att_pool_frame = torch.sum(gcn_output_frame, dim=1)
 
-        #############Video-level GCN########################
-        gcn_frame_output = gcn_att_pool_frame.view(batch_size, num_clip, -1)
-        #############Global GCN########## 
+        #############Gc########################
+        gcn_frame_output = gcn_att_pool_frame.view(batch_size, num_clip, -1) 
         # app_feats_c = app_feats[:, :, 1, :]
         batch_size, num_clip, _ = mot_feats.size()
         num_clips = torch.tensor([num_clip] * batch_size, dtype=torch.long)
@@ -215,10 +214,10 @@ class HQGA(nn.Module):
         gcn_clip_input = self.merge_cm(tmp)
         gcn_output_clip = gcn_clip_input
         
-        v_output, QV = self.bidirec_att(gcn_clip_input, num_clips, qas_feat, qas_lengths)
+        v_output, QC = self.bidirec_att(gcn_clip_input, num_clips, qas_feat, qas_lengths)
         v_output += gcn_clip_input
         
-        gcn_output_clip, GV = self.gcn_clip(v_output, num_clips)
+        gcn_output_clip, GC = self.gcn_clip(v_output, num_clips)
         
         if self.num_class >= 1:
             att_clip = self.gcn_atten_pool_clip(gcn_output_clip)
@@ -228,8 +227,8 @@ class HQGA(nn.Module):
         
 
         # vis_graph = {'QG-F':{'A':GO, 'P':att_region, 'Q':QO},
-        #              'QG-C':{'A':GA, 'P':att_frame, 'Q':QA},
-        #              'QG-V':{'A':GV, 'P':att_clip, 'Q':QV}}
+        #              'QG-C':{'A':GF, 'P':att_frame, 'Q':QF},
+        #              'QG-V':{'A':GC, 'P':att_clip, 'Q':QC}}
         vis_graph = None
 
         return gcn_output_clip, gcn_att_pool_clip, num_clips, vis_graph
