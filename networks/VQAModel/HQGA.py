@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import random as rd
 import numpy as np
-from biatt import BiAttn
+from cmatt import CMAtten
 from graph import GCN
 
 class HQGA(nn.Module):
@@ -22,7 +22,7 @@ class HQGA(nn.Module):
         layer_num = 2
         half = 2
 
-        self.bidirec_att = BiAttn(None, 'dot', get_h=False)
+        self.bidirec_att = CMAtten()#BiAttn(None, 'dot', get_h=False)
         self.gcn_region = GCN(
             hidden_size,
             hidden_size//half,
