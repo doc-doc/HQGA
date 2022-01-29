@@ -1,11 +1,3 @@
-"""
-Copyright (c) Microsoft Corporation.
-Licensed under the MIT license.
-Relation-aware Graph Attention Network for Visual Question Answering
-Linjie Li, Zhe Gan, Yu Cheng, Jingjing Liu
-https://arxiv.org/abs/1903.12314
-This code is written by Linjie Li.
-"""
 import numpy as np
 import math
 import torch
