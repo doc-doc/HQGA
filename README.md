@@ -1,4 +1,4 @@
-## [HQGA](https://arxiv.org/pdf/2112.06197.pdf): Video as Conditional Graph Hierarchy for Multi-Granular Question Answering
+## [HQGA](https://arxiv.org/pdf/2112.06197v2.pdf): Video as Conditional Graph Hierarchy for Multi-Granular Question Answering
 
 ![teaser](https://github.com/doc-doc/HQGA/blob/main/introduction.png)
 
