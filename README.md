@@ -41,7 +41,12 @@ If you want to train the model (Please follow our paper for details.), please ru
 ```
 It will train the model and save to ['models/msvd']. 
 
-## Result Visualization
+## Result 
+| Models                  | NExT-Val | NExT-Test | TGIF-Action | TGIF-Transition | TGIF-FrameQA | MSRVTT-QA | MSVD-QA|
+| -------------------------| --------: | ----: | ----: | ----: | ---:| --------: | ----:|
+| HQGA                  |   51.42   | 51.75 | 76.9  | 85.6  | 61.3|     38.6  | 41.2 |
+
+##Visualization
 ![vis-res](https://github.com/doc-doc/HQGA/blob/main/vis-res.png)
 **Example from NExT-QA dataset.
 ## Citation
