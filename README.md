@@ -56,6 +56,7 @@ It will train the model and save to ['models/msvd'].
       author={Junbin Xiao and Angela Yao and Zhiyuan Liu and Yicong Li and Wei Ji and Tat-Seng Chua},
       booktitle={Proceedings of the 36th AAAI Conference on Artificial Intelligence (AAAI)},
       year={2022},
+      pages={2804-2812}
 }
 ```
 ## Acknowledgement
